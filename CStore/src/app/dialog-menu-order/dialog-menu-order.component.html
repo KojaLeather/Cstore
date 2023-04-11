@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Order menu</h1>
+<div mat-dialog-content>
+  <p>Do you want to order a {{data.product.title}}?</p>
+  <p>Price: {{data.product.cost}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onNoClick()">Yesn't</button>
+</div>
