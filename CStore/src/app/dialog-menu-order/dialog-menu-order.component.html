@@ -2,6 +2,18 @@
 <div mat-dialog-content>
   <p>Do you want to order a {{data.product.title}}?</p>
   <p>Price: {{data.product.cost}}</p>
+  <p>Provide your information</p>
+  <mat-form-field>
+    <mat-label>Phone</mat-label>
+    <span matPrefix>+7 &nbsp;</span>
+    <input type="tel" name="phone" matInput placeholder="123-123-21-21" />
+    <mat-icon matSuffix>mode_edit</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input type="email" formControlComponent="eMail" matInput placeholder="example@example.com" />
+    <mat-icon matSuffix>mode_edix</mat-icon>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>

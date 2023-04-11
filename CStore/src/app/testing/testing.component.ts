@@ -26,7 +26,7 @@ export class TestingComponent implements OnInit {
   openDialog(i: any): void {
     const dialogRef = this.dialog.open(DialogMenuOrderComponent, {
       width: '600px',
-      
+  /*    panelClass: "mdc-dialog__surface", */
       data: { product: this.product.data[i-1] }
     })
     console.log(i);

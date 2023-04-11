@@ -1,0 +1,11 @@
+.dialog-wrapper {
+  border-radius: 10px !important;
+}
+mat-form-field {
+    display:grid;
+    grid-column: 2;
+}
+.checking{
+    border-radius: 10px;
+    border: none;
+}

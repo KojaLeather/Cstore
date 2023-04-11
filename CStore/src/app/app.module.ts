@@ -13,6 +13,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogMenuOrderComponent } from './dialog-menu-order/dialog-menu-order.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { DialogMenuOrderComponent } from './dialog-menu-order/dialog-menu-order.
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,
-    MatDialogModule
+    MatDialogModule, MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
