@@ -20,18 +20,15 @@ export class TestingComponent implements OnInit {
   ngOnInit() {
     this.http.get<Product>("api/Products").subscribe(result => {
       this.product = result;
-      console.log(this.product);
+      //console.log(this.product);
     }, error => console.error(error));
   }
   openDialog(i: any): void {
     const dialogRef = this.dialog.open(DialogMenuOrderComponent, {
       width: '600px',
-  /*    panelClass: "mdc-dialog__surface", */
-      data: { product: this.product.data[i-1] }
-    })
-    console.log(i);
-    console.log(this.product.data[i-1])
-      ;
+      /*    panelClass: "mdc-dialog__surface", */
+      data: { product: this.product.data[i - 1] }
+    });
     dialogRef.afterClosed().subscribe(result =>
       console.log(result));
   }

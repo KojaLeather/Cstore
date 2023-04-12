@@ -3,19 +3,21 @@
   <p>Do you want to order a {{data.product.title}}?</p>
   <p>Price: {{data.product.cost}}</p>
   <p>Provide your information</p>
+<form [formGroup]="orderform" (ngSubmit)="onSubmit()">
   <mat-form-field>
     <mat-label>Phone</mat-label>
     <span matPrefix>+7 &nbsp;</span>
-    <input type="tel" name="phone" matInput placeholder="123-123-21-21" />
+    <input type="tel" name="phone" matInput placeholder="123-123-21-21" formControlName="phone"/>
     <mat-icon matSuffix>mode_edit</mat-icon>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input type="email" formControlComponent="eMail" matInput placeholder="example@example.com" />
+    <input type="email" matInput placeholder="example@example.com" formControlName="eMail"/>
     <mat-icon matSuffix>mode_edix</mat-icon>
   </mat-form-field>
+</form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button (click)="onNoClick()">Yesn't</button>
+  <button mat-button (click)="onClose()">No Thanks</button>
+  <button mat-button (click)="onSubmit()" type="submit">Yesn't</button>
 </div>

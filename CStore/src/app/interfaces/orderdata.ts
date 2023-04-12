@@ -1,6 +1,6 @@
 export interface Order {
-  id: number;
-  phone: number;
+  id: number | null;
+  phone: string;
   eMail: string;
   productId: number;
 }

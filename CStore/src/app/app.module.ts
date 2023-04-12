@@ -14,17 +14,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogMenuOrderComponent } from './dialog-menu-order/dialog-menu-order.component';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { OrdersListComponent } from './orders-list/orders-list.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     TestingComponent,
-    DialogMenuOrderComponent
+    DialogMenuOrderComponent,
+    OrdersListComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,
-    MatDialogModule, MatInputModule
+    MatDialogModule, MatInputModule, ReactiveFormsModule, MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

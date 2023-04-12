@@ -1,0 +1,31 @@
+<table mat-table class="mat-elevation-z8" [dataSource]="orders">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let order"> {{order.id}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="phone">
+    <mat-header-cell mat-header-cell *matHeaderCellDef> Customer's Phone </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let order"> +7{{order.phone}} </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="eMail">
+    <mat-header-cell mat-header-cell *matHeaderCellDef> Customer's Email </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let order"> {{order.eMail}} </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="productId">
+    <mat-header-cell mat-header-cell *matHeaderCellDef> Id of Ordered Product </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let order"> {{order.productId}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onClick()" class="matrow"></mat-row>
+</table>

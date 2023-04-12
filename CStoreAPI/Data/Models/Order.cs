@@ -9,7 +9,7 @@ namespace CStoreAPI.Data.Models
         [Key]
         [Required]
         public int Id { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; } = null!;
         public string EMail { get; set; } = null!;
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }

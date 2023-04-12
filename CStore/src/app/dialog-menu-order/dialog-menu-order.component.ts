@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TestingComponent } from '../testing/testing.component';
 import { Product } from '../interfaces/product';
-import { FormBuilder, FormGroup } from '@angular/forms/'
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../interfaces/orderdata';
 
@@ -13,18 +13,31 @@ import { Order } from '../interfaces/orderdata';
   styleUrls: ['./dialog-menu-order.component.css']
 })
 export class DialogMenuOrderComponent implements OnInit {
+  orderform!: FormGroup;
   products!: Product;
-  order?: Order;
+  order!: Order;
   constructor(public dialogRef: MatDialogRef<DialogMenuOrderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private httpClient: HttpClient) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {}
   ngOnInit() {
-    console.log(this.data);
+    this.orderform = new FormGroup({
+      'phone': new FormControl(''),
+      'eMail': new FormControl(''),
+    })
+    console.log(this.data.product.id);
   }
-  onNoClick(): void {
+  onClose(): void {
     this.dialogRef.close();
   }
-/*  onClick(): void {
-    console.log(this.orderData.get('eMail'))
+  onSubmit(): void {
+    var order = <Order>{};
+    order.eMail = this.orderform.controls['eMail'].value;
+    order.phone = this.orderform.controls['phone'].value;
+    order.productId = this.data.product.id;
+    console.log(order);
+    var url = "api/Orders"
+    this.http.post<Order>(url, order).subscribe(result => {
+      console.log(order, +" has been sent");
+      this.dialogRef.close();
+    }, error => console.error(error));
   }
-  */
 }
