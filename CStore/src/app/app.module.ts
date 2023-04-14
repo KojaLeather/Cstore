@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { MatTableModule } from '@angular/material/table';
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,
-    MatDialogModule, MatInputModule, ReactiveFormsModule, MatTableModule
+    MatDialogModule, MatInputModule, ReactiveFormsModule, MatTableModule, MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

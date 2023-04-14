@@ -1,24 +1,33 @@
-<h1 class="LGBTQ">Testing Testing Testing Testing Testing </h1>
-<div class="card-wrapper">
-  <mat-card class="products" *ngFor="let products of product.data">
-    <mat-card-header>
-      <mat-card-title>
-        {{products.title}}
-      </mat-card-title>
-    </mat-card-header>
-    <img class="goods" src="data:image/png;base64, {{products.base64String}}" alt="{{products.imageName}}" />
-    <mat-card-content>
-      <p class="description">
-        {{products.description}}
-      </p>
-      <p class="price">Price: {{products.cost}}</p>
-      <p class="quantity">Products left: {{products.quantity}}</p>
-    </mat-card-content>
-    <mat-card-actions id="{{products.id}}">
-      <button mat-button class="order" (click)="openDialog(products.id)">ORDER</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
-  <footer>
-    sosi bibu
-  </footer>
+<mat-drawer-container class="TypeContainer">
+  <mat-drawer mode="side" opened #drawer class="sidenav">
+    <div *ngFor="let products of product.data">
+      <button mat-button>{{products.title}}</button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <h1 class="LGBTQ">Testing Testing Testing Testing Testing </h1>
+    <div class="card-wrapper">
+      <mat-card class="products" *ngFor="let products of product.data">
+        <mat-card-header>
+          <mat-card-title>
+            {{products.title}}
+          </mat-card-title>
+        </mat-card-header>
+        <img class="goods" src="data:image/png;base64, {{products.base64String}}" alt="{{products.imageName}}" />
+        <mat-card-content>
+          <p class="description">
+            {{products.description}}
+          </p>
+          <p class="price">Price: {{products.cost}}</p>
+          <p class="quantity">Products left: {{products.quantity}}</p>
+        </mat-card-content>
+        <mat-card-actions id="{{products.id}}">
+          <button mat-button class="order" (click)="openDialog(products.id)">ORDER</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+<footer>
+  sosi bisbu
+</footer>
