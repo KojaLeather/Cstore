@@ -1,7 +1,7 @@
 <mat-drawer-container class="TypeContainer">
   <mat-drawer mode="side" opened #drawer class="sidenav">
-    <div *ngFor="let products of product.data">
-      <button mat-button>{{products.title}}</button>
+    <div *ngFor="let type of types">
+      <button mat-button>{{type.typeName}}</button>
     </div>
   </mat-drawer>
   <mat-drawer-content>
