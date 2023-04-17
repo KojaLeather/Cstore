@@ -13,6 +13,7 @@ namespace CStoreAPI.Data
         {
 
         }
+        public DbSet<Category> Categories => Set<Category>();
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Image> Images => Set<Image>();
         public DbSet<Order> Orders => Set<Order>();

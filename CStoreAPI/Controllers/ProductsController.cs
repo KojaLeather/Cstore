@@ -35,13 +35,12 @@ namespace CStoreAPI.Controllers
                     Description = c.Description,
                     Cost = c.Cost,
                     Quantity = c.Quantity,
-                    Base64String = _imgwrk.ReadFile(c.Images!.FilePath),
-                    ImageName = c.Images.Name
+                    Base64String = _imgwrk.ReadFile(c.Images!.FilePath)
                 }));
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
           if (_context.Products == null)
@@ -56,6 +55,20 @@ namespace CStoreAPI.Controllers
             }
 
             return product;
+        }
+        [HttpGet("{category:alpha}")]
+        public async Task<ActionResult<ApiResult<ProductDTO>>> GetProductsByCategory(string category)
+        {
+            return await ApiResult<ProductDTO>.CreateAsync(
+                _context.Products.AsNoTracking().Include(c => c.Category).Where(c => c.Category.CategoryName == category).Select(c => new ProductDTO()
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Description = c.Description,
+                    Cost = c.Cost,
+                    Quantity = c.Quantity,
+                    Base64String = _imgwrk.ReadFile(c.Images!.FilePath)
+                }));
         }
 
         // PUT: api/Products/5

@@ -12,7 +12,7 @@ namespace CStoreAPI.Data.Models
         public string Phone { get; set; } = null!;
         public string EMail { get; set; } = null!;
         [ForeignKey(nameof(Product))]
-        public int ProductId { get; set; }
-        public Product? Product { get; set; }
+        public virtual int ProductId { get; set; }
+        public virtual Product? Product { get; set; }
     }
 }

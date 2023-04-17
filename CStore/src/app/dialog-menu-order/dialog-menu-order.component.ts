@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
-import { TestingComponent } from '../testing/testing.component';
+import { HomeComponent } from '../home/home.component';
 import { Product } from '../interfaces/product';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';

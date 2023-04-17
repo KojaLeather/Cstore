@@ -16,6 +16,9 @@ namespace CStoreAPI.Data.Models
         public string Description { get; set; } = null!;
         public int Cost { get; set; }
         public int Quantity { get; set; }
-        public Image? Images { get; set; }
+        public virtual Image? Images { get; set; }
+        [ForeignKey(nameof(Category))]
+        public virtual int CategoryId { get; set; }
+        public virtual Category? Category { get; set; }
     }
 }

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { TestingComponent } from './testing/testing.component';
+import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,9 +23,9 @@ import { MatSidenavModule } from '@angular/material/sidenav'
   declarations: [
     AppComponent,
     NavMenuComponent,
-    TestingComponent,
     DialogMenuOrderComponent,
-    OrdersListComponent
+    OrdersListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,

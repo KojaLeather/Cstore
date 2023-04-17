@@ -1,4 +1,4 @@
-﻿/*using System.Security;
+﻿using System.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CStoreAPI.Data;
@@ -23,10 +23,23 @@ namespace CStoreAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> Import()
         {
+            //Seeding Category Table
+            string[] categories = { "TShirts", "Longsleeves", "Hoodies", "Hats" };
+            foreach (string category in categories)
+            {
+                var newCategory = new Category
+                {
+                    CategoryName = category
+                };
+                await _context.Categories.AddAsync(newCategory);
+            }
+
+            //Seeding Product Table
             string[] title = { "Black TShirt", "White TShirt", "LongSleeve Xan", "Ahegao Hoodie", "Black Russian Hat" };
             string[] description = { "Regular Cotton Black TShirt", "Regular Cotton White TShirt", "Longsleeve with alprazolam ad", "Hoodie for Cringe people", "Cool hat of local textile factory" };
             int[] cost = { 2000, 1800, 3000, 5000, 2000 };
             int[] quantity = { 5, 5, 5, 5, 5 };
+            int[] categoryId = { 1, 1, 2, 3, 4 };
             int i = 0;
             while (i < 5)
             {
@@ -35,13 +48,15 @@ namespace CStoreAPI.Controllers
                     Title = title[i],
                     Description = description[i],
                     Cost = cost[i],
-                    Quantity = quantity[i]
+                    Quantity = quantity[i],
+                    CategoryId = categoryId[i]
                 };
                 await _context.Products.AddAsync(product);
                 i++;
             }
             await _context.SaveChangesAsync();
-            string[] name = { "Black TShirt", "White TShirt", "LongSleeve Xan", "Ahegao Hoodie", "Black Russian Hat" };
+
+            //Seeding Image Table
             string path = "D:\\Programming\\FirstPetProject\\FileStorage\\Images";
             string[] filePath = { "BTs.jpg", "WTs.jpg", "LSx.jpg", "AGH.jpg", "BRH.jpg" };
             int[] productId = { 1, 2, 3, 4, 5 };
@@ -50,7 +65,6 @@ namespace CStoreAPI.Controllers
             {
                 var image = new Image
                 {
-                    Name = name[j],
                     FilePath = Path.Combine(path, filePath[j]),
                     ProductId = productId[j]
                 };
@@ -66,4 +80,3 @@ namespace CStoreAPI.Controllers
         }
     }
 }
-*/

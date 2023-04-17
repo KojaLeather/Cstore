@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TestingComponent } from './testing/testing.component';
+import { HomeComponent } from './home/home.component';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 
 const routes: Routes = [
-  { path: 'testing', component: TestingComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'orders', component: OrdersListComponent },
-  { path: 'testing/:type', component: TestingComponent }
 ];
 
 @NgModule({

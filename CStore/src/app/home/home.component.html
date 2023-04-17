@@ -1,11 +1,10 @@
 <mat-drawer-container class="TypeContainer">
   <mat-drawer mode="side" opened #drawer class="sidenav">
-    <div *ngFor="let type of types">
-      <button mat-button>{{type.typeName}}</button>
+    <div *ngFor="let category of categories">
+      <button mat-button (click)="ChangeCategory(category.categoryName)">{{category.categoryName}}</button>
     </div>
   </mat-drawer>
   <mat-drawer-content>
-    <h1 class="LGBTQ">Testing Testing Testing Testing Testing </h1>
     <div class="card-wrapper">
       <mat-card class="products" *ngFor="let products of product.data">
         <mat-card-header>
