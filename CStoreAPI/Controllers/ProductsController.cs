@@ -41,20 +41,22 @@ namespace CStoreAPI.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ApiResult<ProductDTO>>> GetProduct(int id)
         {
           if (_context.Products == null)
           {
               return NotFound();
           }
-            var product = await _context.Products.FindAsync(id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return product;
+            return await ApiResult<ProductDTO>.CreateAsync(
+                _context.Products.AsNoTracking().Where(c => c.Id == id).Select(c => new ProductDTO()
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Description = c.Description,
+                    Cost = c.Cost,
+                    Quantity = c.Quantity,
+                    Base64String = _imgwrk.ReadFile(c.Images!.FilePath)
+                }));
         }
         [HttpGet("{category:alpha}")]
         public async Task<ActionResult<ApiResult<ProductDTO>>> GetProductsByCategory(string category)

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-
+  reload(): void {
+    if (window.location.href == window.location.origin + "/") {
+      window.location.reload();
+    }
+  }
 }

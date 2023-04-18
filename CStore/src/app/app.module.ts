@@ -17,7 +17,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { ProductPageComponent } from './product-page/product-page.component'
+import { MatGridListModule } from '@angular/material/grid-list'
 
 @NgModule({
   declarations: [
@@ -25,11 +27,12 @@ import { MatSidenavModule } from '@angular/material/sidenav'
     NavMenuComponent,
     DialogMenuOrderComponent,
     OrdersListComponent,
-    HomeComponent
+    HomeComponent,
+    ProductPageComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,
-    MatDialogModule, MatInputModule, ReactiveFormsModule, MatTableModule, MatSidenavModule
+    MatDialogModule, MatInputModule, ReactiveFormsModule, MatTableModule, MatSidenavModule, MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

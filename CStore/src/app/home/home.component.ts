@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   categories!: Category[]
   imageSource: any;
 
-  constructor(private http: HttpClient, public dialog: MatDialog, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
   }
   ngOnInit() {
       this.http.get<Product>("api/Products").subscribe(result => {
@@ -42,6 +42,9 @@ export class HomeComponent implements OnInit {
       this.product = result;
       console.log(result);
     }, error => console.error(error));
+  }
+  OnImageClick(id: number) {
+    this.router.navigate([`/product/${id}`])
   }
   title = 'CStore';
 }

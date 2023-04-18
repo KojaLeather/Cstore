@@ -1,0 +1,44 @@
+<mat-grid-list cols="6" rowHeight="80px" *ngFor="let products of product.data">
+  <mat-grid-tile [colspan]="4"
+                 [rowspan]="1">
+    <h1>{{products.title}}</h1>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="4"
+                 [rowspan]="6">
+    <img class="goods" src="data:image/png;base64, {{products.base64String}}" alt="{{products.imageName}}" />
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2"
+                 [rowspan]="9">
+    <div mat-dialog-content>
+      <p>Do you want to order a {{products.title}}?</p>
+      <p>Price: {{products.cost}}</p>
+      <p>Provide your information</p>
+      <form [formGroup]="orderform">
+        <mat-form-field class="formfield">
+          <mat-label>Phone</mat-label>
+          <span matPrefix>+7 &nbsp;</span>
+          <input type="tel" name="phone" matInput placeholder="123-123-21-21" formControlName="phone" />
+          <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="formfield">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="example@example.com" formControlName="eMail" />
+          <mat-icon matSuffix>mode_edix</mat-icon>
+        </mat-form-field>
+        <div mat-dialog-actions>
+          <button mat-button (click)="onCancel()">No Thanks</button>
+          <button mat-button type="submit" (click)="onSubmit()">Yesn't</button>
+        </div>
+      </form>
+    </div>
+
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="4"
+                 [rowspan]="1">
+    <h1>{{products.description}}</h1>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="4"
+                 [rowspan]="1">
+    <h2>Remains: {{products.quantity}}</h2>
+  </mat-grid-tile>
+</mat-grid-list>
