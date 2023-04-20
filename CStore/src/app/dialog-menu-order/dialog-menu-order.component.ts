@@ -33,6 +33,7 @@ export class DialogMenuOrderComponent implements OnInit {
     order.eMail = this.orderform.controls['eMail'].value;
     order.phone = this.orderform.controls['phone'].value;
     order.productId = this.data.product.id;
+    order.status = 1;
     console.log(order);
     var url = "api/Orders"
     this.http.post<Order>(url, order).subscribe(result => {

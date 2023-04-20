@@ -11,6 +11,7 @@ namespace CStoreAPI.Data.Models
         public int Id { get; set; }
         public string Phone { get; set; } = null!;
         public string EMail { get; set; } = null!;
+        public int Status { get; set; }
         [ForeignKey(nameof(Product))]
         public virtual int ProductId { get; set; }
         public virtual Product? Product { get; set; }

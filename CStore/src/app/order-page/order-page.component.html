@@ -1,0 +1,9 @@
+<h1>Orders Id: {{order.id}}</h1>
+<h1>Customer Phone: {{order.phone}}</h1>
+<h1>Customer Email: {{order.eMail}}</h1>
+<h1>Products Id: {{order.productId}}</h1>
+<h1>Status of order: {{getStatus(order.status)}}</h1>
+<div *ngIf="order.status < 3">
+  <button mat-button (click)="onClick()">{{getStatus(order.status+1).slice(0, -2)}}</button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>

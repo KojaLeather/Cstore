@@ -19,7 +19,8 @@ import { OrdersListComponent } from './orders-list/orders-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ProductPageComponent } from './product-page/product-page.component'
-import { MatGridListModule } from '@angular/material/grid-list'
+import { MatGridListModule } from '@angular/material/grid-list';
+import { OrderPageComponent } from './order-page/order-page.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MatGridListModule } from '@angular/material/grid-list'
     DialogMenuOrderComponent,
     OrdersListComponent,
     HomeComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    OrderPageComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,

@@ -3,4 +3,5 @@ export interface Order {
   phone: string;
   eMail: string;
   productId: number;
+  status: number;
 }

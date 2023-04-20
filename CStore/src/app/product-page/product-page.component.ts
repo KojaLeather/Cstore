@@ -41,6 +41,7 @@ export class ProductPageComponent {
     order.eMail = this.orderform.controls['eMail'].value;
     order.phone = this.orderform.controls['phone'].value;
     order.productId = this.id;
+    order.status = 1;
     console.log(order);
     var url = "api/Orders"
     this.http.post<Order>(url, order).subscribe(result => {

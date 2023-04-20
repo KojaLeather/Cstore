@@ -5,7 +5,7 @@
   <!-- Position Column -->
   <ng-container matColumnDef="id">
     <mat-header-cell mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-    <mat-cell mat-cell *matCellDef="let order"> {{order.id}} </mat-cell>
+    <mat-cell mat-cell *matCellDef="let order" (click)="onClick(order.id)" class="id"> {{order.id}} </mat-cell>
   </ng-container>
 
   <!-- Name Column -->
@@ -26,6 +26,12 @@
     <mat-cell mat-cell *matCellDef="let order"> {{order.productId}} </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="status">
+    <mat-header-cell mat-header-cell *matHeaderCellDef> Status of Order </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let order"> {{getStatus(order.status)}} </mat-cell>
+  </ng-container>
+
+
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onClick()" class="matrow"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" class="matrow"></mat-row>
 </table>
