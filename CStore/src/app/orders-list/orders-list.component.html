@@ -1,3 +1,10 @@
+<div>
+  <button mat-button (click)="onReload(0)">All</button>
+  <button mat-button (click)="onReload(1)">Ordered</button>
+  <button mat-button (click)="onReload(2)">Accepted</button>
+  <button mat-button (click)="onReload(3)">Completed</button>
+  <button mat-button (click)="onReload(4)">Canceled</button>
+</div>
 <table mat-table class="mat-elevation-z8" [dataSource]="orders">
 
   <!--- Note that these columns can be defined in any order.

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../interfaces/orderdata';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { OrderPageComponent } from '../order-page/order-page.component';
 
@@ -13,15 +13,26 @@ import { OrderPageComponent } from '../order-page/order-page.component';
 export class OrdersListComponent implements OnInit {
   public displayedColumns: string[] = ['id', 'phone', 'eMail', 'productId', 'status']
   public orders!: MatTableDataSource<Order>
-  constructor(private http: HttpClient, private router: Router) { }
+  public param: string;
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
   ngOnInit() {
-    this.http.get<Order[]>("api/Orders").subscribe(result => {
+    this.route.queryParams.subscribe(params => {
+      this.param = params['status'];
+      console.log(this.param);
+    })
+    this.http.get<Order[]>("api/Orders" + "?status=" + this.param).subscribe(result => {
       this.orders = new MatTableDataSource<Order>(result);
       console.log(this.orders);
     }, error => console.log(error));
   }
   onClick(id: number) {
     this.router.navigate(['/order/' + id]);
+  }
+  onReload(id: number) {
+    this.http.get<Order[]>("api/Orders" + "?status=" + id).subscribe(result => {
+      this.orders = new MatTableDataSource<Order>(result);
+      console.log(this.orders);
+    }, error => console.log(error));
   }
   getStatus(status: number) {
     switch (status) {

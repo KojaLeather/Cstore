@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CStoreAPI.Data;
 using CStoreAPI.Data.Models;
+using System.Linq.Dynamic.Core;
 
 namespace CStoreAPI.Controllers
 {
@@ -25,11 +26,17 @@ namespace CStoreAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-          if (_context.Orders == null)
-          {
-              return NotFound();
-          }
-            return await _context.Orders.ToListAsync();
+            if (_context.Orders == null)
+            {
+                return NotFound();
+            }
+            int.TryParse(HttpContext.Request.Query["status"].ToString(), out int status);
+            Console.WriteLine(status);
+            if (status != 0)
+            {
+                return await _context.Orders.Where(c => c.Status == status).OrderByDescending(c => c.Id).ToListAsync();
+            }
+            else return await _context.Orders.OrderByDescending(c => c.Id).ToListAsync();
         }
 
         // GET: api/Orders/5

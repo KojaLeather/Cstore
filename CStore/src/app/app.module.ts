@@ -20,7 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ProductPageComponent } from './product-page/product-page.component'
 import { MatGridListModule } from '@angular/material/grid-list';
-import { OrderPageComponent } from './order-page/order-page.component'
+import { OrderPageComponent } from './order-page/order-page.component';
+import { AddProductComponent } from './add-product/add-product.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { OrderPageComponent } from './order-page/order-page.component'
     OrdersListComponent,
     HomeComponent,
     ProductPageComponent,
-    OrderPageComponent
+    OrderPageComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,
