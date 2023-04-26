@@ -21,7 +21,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ProductPageComponent } from './product-page/product-page.component'
 import { MatGridListModule } from '@angular/material/grid-list';
 import { OrderPageComponent } from './order-page/order-page.component';
-import { AddProductComponent } from './add-product/add-product.component'
+import { AddProductComponent } from './add-product/add-product.component';
+import { AddCategoryComponent } from './add-category/add-category.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AddProductComponent } from './add-product/add-product.component'
     HomeComponent,
     ProductPageComponent,
     OrderPageComponent,
-    AddProductComponent
+    AddProductComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,

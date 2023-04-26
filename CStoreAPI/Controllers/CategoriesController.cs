@@ -90,6 +90,10 @@ namespace CStoreAPI.Controllers
           {
               return Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
           }
+          if (_context.Categories.Any(e => e.CategoryName == category.CategoryName) == true)
+            {
+                return BadRequest();
+            } 
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css']
 })
-export class ProductPageComponent {
+export class ProductPageComponent implements OnInit {
   product!: Product;
   orderform!: FormGroup;
   order!: Order;
