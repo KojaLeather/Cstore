@@ -69,6 +69,15 @@ namespace CStoreAPI.Controllers
 
             _context.Entry(order).State = EntityState.Modified;
 
+            if (order.Status == 2)
+            {
+                var product = _context.Products.SingleOrDefault(e => e.Id == order.ProductId);
+                if (product != null)
+                {
+                    product.Quantity--;
+                };
+            }
+
             try
             {
                 await _context.SaveChangesAsync();
