@@ -1,5 +1,5 @@
 <input type="file" class="file-input"
-       (change)="onFileSelected()" #fileUpload>
+       (change)="onFileSelected($event)" #fileUpload style="visibility: hidden">
 
 <div class="file-upload">
 
@@ -8,5 +8,8 @@
   <button mat-mini-fab color="primary" class="upload-btn"
           (click)="fileUpload.click()">
     <mat-icon>attach_file</mat-icon>
+  </button>
+  <button (click)="postFile()">
+    Post
   </button>
 </div>

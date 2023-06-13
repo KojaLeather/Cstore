@@ -4,6 +4,7 @@ namespace CStoreAPI.Data
 {
     public class ImageWork : IFileWork
     {
+        const string path = "D:\\";
         public string ReadFile(string ImageName)
         {
             if (ImageName == null) ImageName = "D:\\Programming\\FirstPetProject\\FileStorage\\ErrorPictures\\Error.jpg";
@@ -24,8 +25,12 @@ namespace CStoreAPI.Data
         }
         public void WriteFile(string ImageBase64, string ImageName)
         {
+            if (ImageBase64.Contains(','))
+            {
+                ImageBase64 = ImageBase64.Substring(ImageBase64.IndexOf(',') + 1);
+            }
             byte[] ImageByte = Convert.FromBase64String(ImageBase64);
-            using (FileStream CreateImage = new FileStream(ImageName, FileMode.Create, FileAccess.Write))
+            using (FileStream CreateImage = new FileStream((path + ImageName), FileMode.Create, FileAccess.Write))
             {
                 int numBytesToRead = ImageByte.Length;
                 CreateImage.Write(ImageByte, 0, numBytesToRead);

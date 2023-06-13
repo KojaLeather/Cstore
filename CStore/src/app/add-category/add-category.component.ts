@@ -35,6 +35,5 @@ export class AddCategoryComponent implements OnInit {
     }, error => {
       this.isDupe = true;
     })
-    
   }
 }
