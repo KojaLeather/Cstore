@@ -28,7 +28,7 @@ export class AddCategoryComponent implements OnInit {
   onSubmit(): void {
     this.isDupe = false;
     var category = <Category>{}
-    category.CategoryName = this.categoryform.controls['category'].value;
+    category.categoryName = this.categoryform.controls['category'].value;
     this.http.post<Category>("api/Categories", category).subscribe(result => {
       console.log("Successful");
       this.router.navigate([``]);;

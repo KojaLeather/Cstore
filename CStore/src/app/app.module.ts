@@ -23,6 +23,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddCategoryComponent } from './add-category/add-category.component'
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { AddCategoryComponent } from './add-category/add-category.component'
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,
-    MatDialogModule, MatInputModule, ReactiveFormsModule, MatTableModule, MatSidenavModule, MatGridListModule
+    MatDialogModule, MatInputModule, ReactiveFormsModule, MatTableModule, MatSidenavModule, MatGridListModule, MatSelectModule, MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

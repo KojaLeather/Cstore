@@ -12,15 +12,25 @@ namespace CStoreAPI.Controllers
     {
         private readonly IFileWork _fileWorkService;
 
-        public HomeController(IFileWork fileWorkService)
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(IFileWork fileWorkService, ApplicationDbContext context)
         {
+            _context = context;
             _fileWorkService = fileWorkService;
         }
         [HttpPost]
-        public  Task<ActionResult<ImageBase64>>? PostImage(ImageBase64 imageBase64)
+        public async Task<ActionResult<ImageBase64>>? PostImage(ImageBase64 imageBase64)
         {
-            _fileWorkService.WriteFile(imageBase64.Base64, imageBase64.FileName);
-            return null;
+            string filepath = _fileWorkService.WriteFile(imageBase64.Base64, imageBase64.FileName);
+            Image image = new Image
+            {
+                FilePath = filepath,
+                ProductId = _context.Products.OrderBy(c => c.Id).Select(c => c.Id).Last()
+            };
+            _context.Images.Add(image);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetImage", new { id = image.Id }, image);
         }
     }
 }

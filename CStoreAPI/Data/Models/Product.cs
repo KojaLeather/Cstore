@@ -20,6 +20,6 @@ namespace CStoreAPI.Data.Models
         [ForeignKey(nameof(Category))]
         public virtual int CategoryId { get; set; }
         public virtual Category? Category { get; set; }
-        public ICollection<Order> Orders { get; set; } = null!; 
+        public virtual ICollection<Order>? Orders { get; set; }
     }
 }

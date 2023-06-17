@@ -4,7 +4,7 @@ namespace CStoreAPI.Data
 {
     public class ImageWork : IFileWork
     {
-        const string path = "D:\\";
+        const string path = "D:\\Programming\\FirstPetProject\\FileStorage\\Images\\";
         public string ReadFile(string ImageName)
         {
             if (ImageName == null) ImageName = "D:\\Programming\\FirstPetProject\\FileStorage\\ErrorPictures\\Error.jpg";
@@ -23,7 +23,7 @@ namespace CStoreAPI.Data
                 return Convert.ToBase64String(bytes, 0, bytes.Length);
             }
         }
-        public void WriteFile(string ImageBase64, string ImageName)
+        public string WriteFile(string ImageBase64, string ImageName)
         {
             if (ImageBase64.Contains(','))
             {
@@ -35,6 +35,7 @@ namespace CStoreAPI.Data
                 int numBytesToRead = ImageByte.Length;
                 CreateImage.Write(ImageByte, 0, numBytesToRead);
             }
+            return path + ImageName;
         }
     }
 }

@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ImageBase64 } from '../interfaces/image';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ProductOne } from '../interfaces/productnew';
+import { Category } from '../interfaces/category';
+import { ThemePalette } from '@angular/material/core';
 
 
 @Component({
@@ -8,11 +12,29 @@ import { ImageBase64 } from '../interfaces/image';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent {
-  fileName = '';
-  base64 = '';
+export class AddProductComponent implements OnInit {
+  fileName: string;
+  base64: string;
+  productForm: FormGroup;
+  categories!: Category[]
+  productId: number;
 
   constructor(private http: HttpClient) { }
+
+  colorControl = new FormControl('primary' as ThemePalette)
+
+  ngOnInit() {
+    this.productForm = new FormGroup({
+      'productTitle': new FormControl(),
+      'productDescription': new FormControl(),
+      'productQuantity': new FormControl(),
+      'productCost': new FormControl()
+    })
+    this.http.get<Category[]>("api/Categories").subscribe(result => {
+      this.categories = result;
+      console.log(this.categories)
+    }, error => console.error(error));
+  }
 
   onFileSelected(fileInput: Event) {
     const element = fileInput.currentTarget as HTMLInputElement;
@@ -40,13 +62,32 @@ export class AddProductComponent {
   }
   postFile() {
     var returnBase64: ImageBase64 = {
-      Base64: this.base64,
-      FileName: this.fileName
+      base64: this.base64,
+      fileName: this.fileName
     };
+    console.log(JSON.stringify(returnBase64));
     this.http.post<ImageBase64>("api/Home", returnBase64).subscribe(result => {
-      console.log(returnBase64);
+      console.log(JSON.stringify(returnBase64));
     }, error => {
-      console.log(error, returnBase64);
+      console.log(JSON.stringify(returnBase64));
     })
+  }
+  OnSubmit() {
+    var product: ProductOne = {
+      title: this.productForm.controls['productTitle'].value,
+      description: this.productForm.controls['productDescription'].value,
+      cost: this.productForm.controls['productCost'].value,
+      quantity: this.productForm.controls['productQuantity'].value,
+      categoryId: this.productId
+    }
+    this.http.post('api/Products', product).subscribe(response => {
+      console.log(response)
+      this.postFile();
+    })
+    console.log(JSON.stringify(product));
+  }
+  changeClient(value: number) {
+    this.productId = value;
+    console.log(value);
   }
 }

@@ -3,7 +3,7 @@ export interface data {
   title: string;
   description: string;
   cost: number;
-  quantity: 1;
+  quantity: number;
   base64String: string;
   imageName: string;
 }

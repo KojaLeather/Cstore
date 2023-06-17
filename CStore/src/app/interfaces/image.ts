@@ -1,4 +1,4 @@
 export interface ImageBase64 {
-  Base64: string,
-  FileName: string
+  base64: string,
+  fileName: string
 }
