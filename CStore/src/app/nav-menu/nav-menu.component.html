@@ -5,14 +5,11 @@
         home
       </mat-icon>
     </button>
-    <a mat-flat-button color="secondary" [routerLink]="['/orders']">
-      Orders
-    </a>
-    <a mat-flat-button color="secondary" [routerLink]="['/addproduct']">
-      Add Product
-    </a>
-    <a mat-flat-button color="secondary" [routerLink]="['/addcategory']">
-      Add Category
-    </a>
+    <button mat-button [matMenuTriggerFor]="menu">Admin Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/orders']">Orders</button>
+      <button mat-menu-item [routerLink]="['/addproduct']">Add Product</button>
+      <button mat-menu-item [routerLink]="['/addcategory']">Add Category</button>
+    </mat-menu>
   </mat-toolbar>
 </header>

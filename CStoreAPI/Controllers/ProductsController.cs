@@ -35,7 +35,7 @@ namespace CStoreAPI.Controllers
                     Description = c.Description,
                     Cost = c.Cost,
                     Quantity = c.Quantity,
-                    Base64String = _imgwrk.ReadFile(c.Images!.FilePath)
+                    Base64String =  _imgwrk.ReadFile(c.Images!.FilePath)
                 }));
         }
 

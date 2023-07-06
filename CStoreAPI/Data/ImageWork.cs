@@ -1,14 +1,23 @@
 ﻿using CStoreAPI.Data;
+using static System.Net.WebRequestMethods;
 
 namespace CStoreAPI.Data
 {
     public class ImageWork : IFileWork
     {
-        const string path = "D:\\Programming\\FirstPetProject\\FileStorage\\Images\\";
+        public string? FSP;
+        public ImageWork()
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(
+            "appsettings.json", optional: true, reloadOnChange: true);
+            FSP = builder.Build().GetSection("Paths").GetSection("FileStoragePath").Value;
+        }
         public string ReadFile(string ImageName)
         {
-            if (ImageName == null) ImageName = "D:\\Programming\\FirstPetProject\\FileStorage\\ErrorPictures\\Error.jpg";
-            using (FileStream fsSource = new FileStream(ImageName, FileMode.Open, FileAccess.Read))
+            string FilePath;
+            if (ImageName == null) FilePath = (FSP + "\\ErrorPictures\\Error.jpg");
+            else FilePath = (FSP + ImageName);
+            using (FileStream fsSource = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
             {
                 byte[] bytes = new byte[fsSource.Length];
                 int numBytesToRead = (int)fsSource.Length;
@@ -25,17 +34,18 @@ namespace CStoreAPI.Data
         }
         public string WriteFile(string ImageBase64, string ImageName)
         {
+            string FilePath = "\\Images\\" + ImageName;
             if (ImageBase64.Contains(','))
             {
                 ImageBase64 = ImageBase64.Substring(ImageBase64.IndexOf(',') + 1);
             }
             byte[] ImageByte = Convert.FromBase64String(ImageBase64);
-            using (FileStream CreateImage = new FileStream((path + ImageName), FileMode.Create, FileAccess.Write))
+            using (FileStream CreateImage = new FileStream((FSP + FilePath), FileMode.Create, FileAccess.Write))
             {
                 int numBytesToRead = ImageByte.Length;
                 CreateImage.Write(ImageByte, 0, numBytesToRead);
             }
-            return path + ImageName;
+            return FilePath;
         }
     }
 }
