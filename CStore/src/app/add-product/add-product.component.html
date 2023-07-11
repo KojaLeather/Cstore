@@ -1,47 +1,43 @@
 <form [formGroup]="productForm">
-  <mat-form-field class="formfield">
+  <mat-form-field class="formfieldTitle">
     <mat-label>Product Title</mat-label>
     <input name="productTitle" matInput placeholder="Black TShirt" formControlName="productTitle" />
     <mat-icon matSuffix>mode_edit</mat-icon>
   </mat-form-field>
-  <mat-form-field class="formfield">
+  <mat-form-field class="formfieldDesc">
     <mat-label>Product Description</mat-label>
     <input name="productDescription" matInput placeholder="Cool TShirt" formControlName="productDescription" />
     <mat-icon matSuffix>mode_edit</mat-icon>
   </mat-form-field>
-  <mat-form-field class="formfield">
+  <mat-form-field class="formfieldCost">
     <mat-label>Product Cost</mat-label>
     <input name="productCost" matInput placeholder="3000" formControlName="productCost" />
     <mat-icon matSuffix>mode_edit</mat-icon>
   </mat-form-field>
-  <mat-form-field class="formfield">
+  <mat-form-field class="formfieldQuantity">
     <mat-label>Product Quantity</mat-label>
     <input name="productQuantity" matInput placeholder="5" formControlName="productQuantity" />
     <mat-icon matSuffix>mode_edit</mat-icon>
   </mat-form-field>
-  <mat-form-field class="formfield">
+  <mat-form-field class="formfieldCategory">
     <mat-label>Select a Category</mat-label>
     <mat-select formContolName="productCost" (selectionChange)="changeClient($event.value)">
       <mat-option *ngFor="let category of categories" [value]="category.id">{{category.categoryName}}</mat-option>
     </mat-select>
   </mat-form-field>
+  <div class="file-upload">
+    {{fileName || "No file uploaded yet."}}
+    <button mat-mini-fab color="primary" class="upload-btn"
+            (click)="fileUpload.click()">
+      <mat-icon>attach_file</mat-icon>
+    </button>
+  </div>
+
   <div mat-dialog-actions>
-    <button mat-button>Cancel</button>
-    <button mat-button type="submit" (click)="OnSubmit()">Yesn</button>
+    <button mat-button class="buttonCancel">Cancel</button>
+    <button mat-button class="buttonSubmit" type="submit" (click)="OnSubmit()">Submit</button>
   </div>
 </form>
 
 <input type="file" class="file-input"
        (change)="onFileSelected($event)" #fileUpload style="visibility: hidden">
-
-<div class="file-upload">
-
-  {{fileName || "No file uploaded yet."}}
-
-  <button mat-mini-fab color="primary" class="upload-btn"
-          (click)="fileUpload.click()">
-    <mat-icon>attach_file</mat-icon>
-  </button>
-</div>
-
-<button (click)="postFile()">Kek</button>

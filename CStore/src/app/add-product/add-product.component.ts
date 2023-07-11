@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ProductOne } from '../interfaces/productnew';
 import { Category } from '../interfaces/category';
 import { ThemePalette } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AddProductComponent implements OnInit {
   categories!: Category[]
   productId: number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   colorControl = new FormControl('primary' as ThemePalette)
 
@@ -83,8 +84,10 @@ export class AddProductComponent implements OnInit {
     this.http.post('api/Products', product).subscribe(response => {
       console.log(response)
       this.postFile();
+      this.router.navigate([``]);
     })
     console.log(JSON.stringify(product));
+
   }
   changeClient(value: number) {
     this.productId = value;

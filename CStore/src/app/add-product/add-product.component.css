@@ -1,0 +1,66 @@
+form {
+  display: grid;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Styling for the form fields */
+.mat-form-field {
+  width: 100%;
+}
+
+/* Styling for the form buttons */
+.mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.buttonCancel {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.buttonSubmit {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* Styling for the file upload */
+.file-input {
+  display: none;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.upload-btn {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+}
+
+  .upload-btn:hover {
+    background-color: #1976d2;
+  }
+
+/* Optional styling for the form fields and icons */
+.mat-input-element {
+  font-size: 16px;
+}
+
+.mat-icon {
+  font-size: 20px;
+}

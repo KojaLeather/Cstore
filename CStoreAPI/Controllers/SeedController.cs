@@ -57,7 +57,7 @@ namespace CStoreAPI.Controllers
             await _context.SaveChangesAsync();
 
             //Seeding Image Table
-            string path = "D:\\Programming\\FirstPetProject\\FileStorage\\Images";
+            string path = "\\Images";
             string[] filePath = { "BTs.jpg", "WTs.jpg", "LSx.jpg", "AGH.jpg", "BRH.jpg" };
             int[] productId = { 1, 2, 3, 4, 5 };
             int j = 0;
