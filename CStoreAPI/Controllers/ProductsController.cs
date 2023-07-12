@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CStoreAPI.Data;
 using CStoreAPI.Data.Models;
+using CStoreAPI.Data.Models.DTO;
+using System.Text.Json;
 
 namespace CStoreAPI.Controllers
 {
@@ -25,10 +27,15 @@ namespace CStoreAPI.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<ApiResult<ProductDTO>>> GetProducts()
+        public async Task<ActionResult<ApiResult<ProductDTO>>> GetProducts([FromQuery] PaginationParams @params)
         {
+            var products = _context.Products.AsNoTracking().OrderBy(c => c.Id);
+            var paginationMetadata = new PaginationMetadata(products.Count(), @params.Page, @params.ItemsPerPage);
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+
             return await ApiResult<ProductDTO>.CreateAsync(
-                _context.Products.AsNoTracking().Select(c => new ProductDTO()
+                products.Skip((@params.Page -1) * @params.ItemsPerPage)
+                .Take(@params.ItemsPerPage).Select(c => new ProductDTO()
                 {
                     Id = c.Id,
                     Title = c.Title,

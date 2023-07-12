@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Product } from "../interfaces/product";
 import { Category } from "../interfaces/type";
@@ -16,13 +16,17 @@ export class HomeComponent implements OnInit {
   product!: Product
   categories!: Category[]
   imageSource: any;
+  page: 1;
+  itemsPerPage: 5;
 
   constructor(private http: HttpClient, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
   }
   ngOnInit() {
-      this.http.get<Product>("api/Products").subscribe(result => {
-        this.product = result;
-        console.log(this.product);
+    this.http.get<Product>("api/Products?Page=1&ItemsPerPage=5", { observe: 'response' })
+      .subscribe((response: HttpResponse<Product>) => {
+        this.product = response.body!;
+        const headers = response.headers.get('X-Pagination');
+        console.log(headers);
       }, error => console.error(error));
     this.http.get<Category[]>("api/Categories").subscribe(result => {
       this.categories = result;

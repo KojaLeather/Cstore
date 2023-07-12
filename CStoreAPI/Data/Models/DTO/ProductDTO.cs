@@ -1,4 +1,4 @@
-﻿namespace CStoreAPI.Data
+﻿namespace CStoreAPI.Data.Models.DTO
 {
     public class ProductDTO
     {
