@@ -27,6 +27,9 @@
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
-<footer>
-  sosi bisbu
-</footer>
+<mat-paginator [length]="paginationHeader.TotalCount"
+               [pageSize]="5"
+               [pageIndex]="paginationHeader.CurrentPage - 1"
+               [showFirstLastButtons]="true"
+               (page)="onPageChange($event)"/>
+

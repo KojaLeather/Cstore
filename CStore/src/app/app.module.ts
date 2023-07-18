@@ -26,6 +26,7 @@ import { AddCategoryComponent } from './add-category/add-category.component'
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { MatMenuModule } from '@angular/material/menu';
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,
     MatDialogModule, MatInputModule, ReactiveFormsModule, MatTableModule, MatSidenavModule, MatGridListModule, MatSelectModule, MatFormFieldModule,
-    MatMenuModule
+    MatMenuModule, MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import { Router, ParamMap, ActivatedRoute } from '@angular/router';
 import { Observable } from "rxjs";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMenuOrderComponent } from '../dialog-menu-order/dialog-menu-order.component';
+import { PaginationHeader } from '../interfaces/paginationHeader';
 
 @Component({
   selector: 'app-root',
@@ -16,17 +17,20 @@ export class HomeComponent implements OnInit {
   product!: Product
   categories!: Category[]
   imageSource: any;
-  page: 1;
+  page: number;
   itemsPerPage: 5;
+  paginationHeader: PaginationHeader;
 
   constructor(private http: HttpClient, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
   }
   ngOnInit() {
-    this.http.get<Product>("api/Products?Page=1&ItemsPerPage=5", { observe: 'response' })
+    this.page = 1;
+    this.http.get<Product>(`api/Products?Page=${this.page}&ItemsPerPage=5`, { observe: 'response' })
       .subscribe((response: HttpResponse<Product>) => {
         this.product = response.body!;
         const headers = response.headers.get('X-Pagination');
         console.log(headers);
+        this.paginationHeader = JSON.parse(headers!) as PaginationHeader;
       }, error => console.error(error));
     this.http.get<Category[]>("api/Categories").subscribe(result => {
       this.categories = result;
@@ -51,4 +55,16 @@ export class HomeComponent implements OnInit {
     this.router.navigate([`/product/${id}`])
   }
   title = 'CStore';
+  onPageChange(event: any) {
+    console.log(event);
+    var newPageIndex = event.pageIndex;
+    console.log(newPageIndex)
+    this.http.get<Product>(`api/Products?Page=${newPageIndex+1}&ItemsPerPage=5`, { observe: 'response' })
+      .subscribe((response: HttpResponse<Product>) => {
+        this.product = response.body!;
+        const headers = response.headers.get('X-Pagination');
+        console.log(headers);
+        this.paginationHeader = JSON.parse(headers!) as PaginationHeader;
+      }, error => console.error(error));
+  }
 }
