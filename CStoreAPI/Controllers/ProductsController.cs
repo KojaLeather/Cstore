@@ -9,6 +9,7 @@ using CStoreAPI.Data;
 using CStoreAPI.Data.Models;
 using CStoreAPI.Data.Models.DTO;
 using System.Text.Json;
+using System.Linq.Dynamic.Core;
 
 namespace CStoreAPI.Controllers
 {
@@ -27,9 +28,9 @@ namespace CStoreAPI.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<ApiResult<ProductDTO>>> GetProducts([FromQuery] PaginationParams @params)
+        public async Task<ActionResult<ApiResult<ProductDTO>>> GetProducts([FromQuery] PaginationParams @params, [FromQuery] string? Category)
         {
-            var products = _context.Products.AsNoTracking().OrderBy(c => c.Id);
+            var products = Category == null ? _context.Products.AsNoTracking().OrderBy(c => c.Id) : _context.Products.AsNoTracking().Include(c => c.Category).Where(c => c.Category!.CategoryName == Category);
             var paginationMetadata = new PaginationMetadata(products.Count(), @params.Page, @params.ItemsPerPage);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
 

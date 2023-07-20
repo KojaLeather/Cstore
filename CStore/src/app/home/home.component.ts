@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   page: number;
   itemsPerPage: 5;
   paginationHeader: PaginationHeader;
+  category: string;
 
   constructor(private http: HttpClient, public dialog: MatDialog, private route: ActivatedRoute, private router: Router) {
   }
@@ -46,21 +47,28 @@ export class HomeComponent implements OnInit {
       console.log(result));
   }
   ChangeCategory(category: string) {
-    this.http.get<Product>(`api/Products/${category}`).subscribe(result => {
-      this.product = result;
-      console.log(result);
-    }, error => console.error(error));
+    console.log(this.page)
+    this.http.get<Product>(`api/Products?Page=1&ItemsPerPage=5&Category=${category}`, { observe: 'response' })
+      .subscribe((response: HttpResponse<Product>) => {
+        this.product = response.body!;
+        const headers = response.headers.get('X-Pagination');
+        console.log(headers);
+        this.paginationHeader = JSON.parse(headers!) as PaginationHeader;
+      }, error => console.error(error));
   }
   OnImageClick(id: number) {
     this.router.navigate([`/product/${id}`])
   }
   title = 'CStore';
   onPageChange(event: any) {
+    var category = ``;
+    if (this.category != null) category = `&Category=${this.category}`
     console.log(event);
     var newPageIndex = event.pageIndex;
     console.log(newPageIndex)
-    this.http.get<Product>(`api/Products?Page=${newPageIndex+1}&ItemsPerPage=5`, { observe: 'response' })
+    this.http.get<Product>(`api/Products?Page=${newPageIndex+1}&ItemsPerPage=5${category}`, { observe: 'response' })
       .subscribe((response: HttpResponse<Product>) => {
+        this.page = newPageIndex;
         this.product = response.body!;
         const headers = response.headers.get('X-Pagination');
         console.log(headers);
