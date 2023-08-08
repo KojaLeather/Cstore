@@ -1,13 +1,13 @@
-<h1>Add new Category</h1>
 <form [formGroup]="categoryform">
+  <h1 style="text-align:center">Add new Category</h1>
   <mat-form-field class="formfield">
     <mat-label>New Category</mat-label>
-    <input name="category" matInput placeholder="TShirts" formControlName="category"/>
+    <input name="category" matInput placeholder="TShirts" formControlName="category" />
     <mat-icon matSuffix>mode_edit</mat-icon>
   </mat-form-field>
   <div mat-dialog-actions>
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button type="submit" (click)="onSubmit()">Yesn</button>
+    <button mat-button class="buttonSubmit" type="submit" (click)="onSubmit()">Submit</button>
+    <button mat-button class="buttonCancel" (click)="onCancel()">Cancel</button>
   </div>
   <h1 style="color: red" *ngIf="isDupe === true">This Category Already Exists.</h1>
 </form>

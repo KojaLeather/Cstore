@@ -1,4 +1,5 @@
 <form [formGroup]="productForm">
+  <h1 style="text-align: center">Add new Product</h1>
   <mat-form-field class="formfieldTitle">
     <mat-label>Product Title</mat-label>
     <input name="productTitle" matInput placeholder="Black TShirt" formControlName="productTitle" />
@@ -34,8 +35,8 @@
   </div>
 
   <div mat-dialog-actions>
-    <button mat-button class="buttonCancel">Cancel</button>
     <button mat-button class="buttonSubmit" type="submit" (click)="OnSubmit()">Submit</button>
+    <button mat-button class="buttonCancel">Cancel</button>
   </div>
 </form>
 

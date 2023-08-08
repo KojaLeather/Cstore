@@ -1,3 +1,5 @@
+using CStoreAPI.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using CStoreAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +20,17 @@ namespace CStoreAPI
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
                  )
             );
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddScoped<JwtHandler>();
 
             var app = builder.Build();
 

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CStoreAPI.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CStoreAPI.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext() : base()
         {
