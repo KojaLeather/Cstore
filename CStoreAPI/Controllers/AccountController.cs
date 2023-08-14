@@ -3,10 +3,44 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using CStoreAPI.Data;
 using CStoreAPI.Data.Models;
+using CStoreAPI.Data.Models.DTO;
 
 namespace CStoreAPI.Controllers
 {
-    public class AccountController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly JwtHandler _jwtHandler;
+        public AccountController (ApplicationDbContext context, UserManager<ApplicationUser> userManager, JwtHandler jwtHandler)
+        {
+            _context = context;
+            _userManager = userManager;
+            _jwtHandler = jwtHandler;
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginRequest loginRequest)
+        {
+            var user = await _userManager.FindByNameAsync(loginRequest.Email);
+            if (!await _userManager.CheckPasswordAsync(user, loginRequest.Password))
+            {
+                return Unauthorized(new LoginResult()
+                {
+                    Success = false,
+                    Message = "Invalid email or password"
+                });
+            }
+            var secToken = await _jwtHandler.GetTokenAsync(user);
+            var jwt = new JwtSecurityTokenHandler().WriteToken(secToken);
+            return Ok(new LoginResult()
+            {
+                Success = true,
+                Message = "Login successful",
+                Token = jwt
+            });
+        }
     }
 }

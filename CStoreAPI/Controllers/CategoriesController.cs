@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CStoreAPI.Data;
 using CStoreAPI.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CStoreAPI.Controllers
 {
@@ -33,6 +34,7 @@ namespace CStoreAPI.Controllers
         }
 
         // GET: api/Categories/5
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
