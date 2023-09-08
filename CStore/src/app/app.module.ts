@@ -27,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { LoginComponent } from './auth/login.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ProductPageComponent,
     OrderPageComponent,
     AddProductComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule,

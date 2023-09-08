@@ -11,5 +11,8 @@
       <button mat-menu-item [routerLink]="['/addproduct']">Add Product</button>
       <button mat-menu-item [routerLink]="['/addcategory']">Add Category</button>
     </mat-menu>
+    <span class="separator"></span>
+    <button *ngIf="!isLoggedIn" mat-button [routerLink]="['/login']">Login</button>
+    <button *ngIf="isLoggedIn" mat-button (click)="onLogout()">Logout</button>
   </mat-toolbar>
 </header>
