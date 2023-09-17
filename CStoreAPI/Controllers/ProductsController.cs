@@ -10,6 +10,8 @@ using CStoreAPI.Data.Models;
 using CStoreAPI.Data.Models.DTO;
 using System.Text.Json;
 using System.Linq.Dynamic.Core;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace CStoreAPI.Controllers
 {
@@ -27,6 +29,7 @@ namespace CStoreAPI.Controllers
         }
 
         // GET: api/Products
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public async Task<ActionResult<ApiResult<ProductDTO>>> GetProducts([FromQuery] PaginationParams @params, [FromQuery] string? Category)
         {
