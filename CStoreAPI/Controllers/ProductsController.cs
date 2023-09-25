@@ -29,7 +29,6 @@ namespace CStoreAPI.Controllers
         }
 
         // GET: api/Products
-        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public async Task<ActionResult<ApiResult<ProductDTO>>> GetProducts([FromQuery] PaginationParams @params, [FromQuery] string? Category)
         {
@@ -86,6 +85,7 @@ namespace CStoreAPI.Controllers
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
@@ -117,6 +117,7 @@ namespace CStoreAPI.Controllers
 
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
@@ -131,6 +132,7 @@ namespace CStoreAPI.Controllers
         }
 
         // DELETE: api/Products/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {

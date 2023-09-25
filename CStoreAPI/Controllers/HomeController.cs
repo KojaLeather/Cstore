@@ -1,7 +1,9 @@
 ﻿using CStoreAPI.Data;
 using CStoreAPI.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Runtime.CompilerServices;
 
 namespace CStoreAPI.Controllers
@@ -19,6 +21,7 @@ namespace CStoreAPI.Controllers
             _context = context;
             _fileWorkService = fileWorkService;
         }
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<ActionResult<ImageBase64>>? PostImage(ImageBase64 imageBase64)
         {

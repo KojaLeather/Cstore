@@ -28,6 +28,7 @@ namespace CStoreAPI.Controllers
             _userManager = userManager;
             
         }
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public async Task<ActionResult> Import()
         {
@@ -86,6 +87,7 @@ namespace CStoreAPI.Controllers
                 ImageAdded = j
             });
         }
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public async Task<ActionResult> CreateDefaultUsers()
         {

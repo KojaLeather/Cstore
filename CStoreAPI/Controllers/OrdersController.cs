@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using CStoreAPI.Data;
 using CStoreAPI.Data.Models;
 using System.Linq.Dynamic.Core;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace CStoreAPI.Controllers
 {
@@ -16,13 +18,16 @@ namespace CStoreAPI.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private IGMailService _iGSend;
 
-        public OrdersController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context, IGMailService iGSend)
         {
             _context = context;
+            _iGSend = iGSend;
         }
 
         // GET: api/Orders
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
@@ -40,6 +45,7 @@ namespace CStoreAPI.Controllers
         }
 
         // GET: api/Orders/5
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
@@ -59,9 +65,12 @@ namespace CStoreAPI.Controllers
 
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrder(int id, Order order)
         {
+            string? message = null;
+            string? subject = null;
             if (id != order.Id)
             {
                 return BadRequest();
@@ -76,8 +85,14 @@ namespace CStoreAPI.Controllers
                 {
                     product.Quantity--;
                 };
-            }
+                message = "Hello! Thank you for your order! It's been accepted and now getting ready to be sent to you!";
+                subject = "Your Order has been Accepted!";
 
+            }
+            if (order.Status == 3) { message = "Hello! Your Order has been sent. Thank you for choosing CStore!"; subject = "Your order has been Completed!"; }
+            if (order.Status == 4) { message = "Hello! Your order has been canceled :c. Please contact support to get more information"; subject = "Cancelled Order"; }
+
+            if (message != null) _iGSend.SendEmail(order.EMail, subject, message);
             try
             {
                 await _context.SaveChangesAsync();
@@ -99,6 +114,7 @@ namespace CStoreAPI.Controllers
 
         // POST: api/Orders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
@@ -113,6 +129,7 @@ namespace CStoreAPI.Controllers
         }
 
         // DELETE: api/Orders/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {

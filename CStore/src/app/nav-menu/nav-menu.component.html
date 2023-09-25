@@ -5,7 +5,7 @@
         home
       </mat-icon>
     </button>
-    <button mat-button [matMenuTriggerFor]="menu">Admin Menu</button>
+    <button *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="menu">Admin Menu</button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item [routerLink]="['/orders']">Orders</button>
       <button mat-menu-item [routerLink]="['/addproduct']">Add Product</button>
