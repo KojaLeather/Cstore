@@ -1,7 +1,6 @@
-﻿using CStoreAPI.Data;
-using static System.Net.WebRequestMethods;
+﻿using static System.Net.WebRequestMethods;
 
-namespace CStoreAPI.Data
+namespace CStoreAPI.Data.Services.FileWorkService
 {
     public class ImageWork : IFileWork
     {
@@ -15,8 +14,8 @@ namespace CStoreAPI.Data
         public string ReadFile(string ImageName)
         {
             string FilePath;
-            if (ImageName == null) FilePath = (FSP + "\\ErrorPictures\\Error.jpg");
-            else FilePath = (FSP + ImageName);
+            if (ImageName == null) FilePath = FSP + "\\ErrorPictures\\Error.jpg";
+            else FilePath = FSP + ImageName;
             using (FileStream fsSource = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
             {
                 byte[] bytes = new byte[fsSource.Length];
@@ -40,7 +39,7 @@ namespace CStoreAPI.Data
                 ImageBase64 = ImageBase64.Substring(ImageBase64.IndexOf(',') + 1);
             }
             byte[] ImageByte = Convert.FromBase64String(ImageBase64);
-            using (FileStream CreateImage = new FileStream((FSP + FilePath), FileMode.Create, FileAccess.Write))
+            using (FileStream CreateImage = new FileStream(FSP + FilePath, FileMode.Create, FileAccess.Write))
             {
                 int numBytesToRead = ImageByte.Length;
                 CreateImage.Write(ImageByte, 0, numBytesToRead);

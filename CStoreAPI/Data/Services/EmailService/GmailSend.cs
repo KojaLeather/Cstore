@@ -1,7 +1,7 @@
 ﻿using System.Net.Mail;
 using System.Net;
 
-namespace CStoreAPI.Data
+namespace CStoreAPI.Data.Services.EmailService
 {
     public class GmailSend : IGMailService
     {
@@ -16,7 +16,7 @@ namespace CStoreAPI.Data
                 EnableSsl = true
             };
             smtpClient.Credentials = new NetworkCredential("allo49etati@gmail.com", secrets["AppPass"]); //Use the new password, generated from google!
-            var message = new System.Net.Mail.MailMessage(new System.Net.Mail.MailAddress("allo49etati@gmail.com", "CStore"), new System.Net.Mail.MailAddress(To, "Client"))
+            var message = new MailMessage(new MailAddress("allo49etati@gmail.com", "CStore"), new MailAddress(To, "Client"))
             {
                 Body = Body,
                 Subject = Subject

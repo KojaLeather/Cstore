@@ -10,6 +10,7 @@ using CStoreAPI.Data.Models;
 using System.Linq.Dynamic.Core;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using CStoreAPI.Data.Services.EmailService;
 
 namespace CStoreAPI.Controllers
 {
@@ -84,10 +85,13 @@ namespace CStoreAPI.Controllers
                 if (product != null)
                 {
                     product.Quantity--;
-                };
-                message = "Hello! Thank you for your order! It's been accepted and now getting ready to be sent to you!";
-                subject = "Your Order has been Accepted!";
-
+                    message = "Hello! Thank you for your order! It's been accepted and now getting ready to be sent to you!";
+                    subject = "Your Order has been Accepted!";
+                }
+                else
+                {
+                    order.Status = 4;
+                }
             }
             if (order.Status == 3) { message = "Hello! Your Order has been sent. Thank you for choosing CStore!"; subject = "Your order has been Completed!"; }
             if (order.Status == 4) { message = "Hello! Your order has been canceled :c. Please contact support to get more information"; subject = "Cancelled Order"; }

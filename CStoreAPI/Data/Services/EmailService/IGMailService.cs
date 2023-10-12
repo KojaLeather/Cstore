@@ -1,4 +1,4 @@
-﻿namespace CStoreAPI.Data
+﻿namespace CStoreAPI.Data.Services.EmailService
 {
     public interface IGMailService
     {

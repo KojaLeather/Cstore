@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using CStoreAPI.Data.Services.EmailService;
+using CStoreAPI.Data.Services.FileWorkService;
+using CStoreAPI.Data.Services.ProductService;
 
 namespace CStoreAPI
 {
@@ -42,6 +45,8 @@ namespace CStoreAPI
             });
             builder.Services.AddSingleton<IFileWork, ImageWork>();
             builder.Services.AddScoped<IGMailService, GmailSend>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddMemoryCache();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
                  )

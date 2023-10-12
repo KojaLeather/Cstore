@@ -12,6 +12,9 @@ using System.Text.Json;
 using System.Linq.Dynamic.Core;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using Microsoft.Extensions.Caching.Memory;
+using CStoreAPI.Data.Services.FileWorkService;
+using CStoreAPI.Data.Services.ProductService;
 
 namespace CStoreAPI.Controllers
 {
@@ -21,19 +24,22 @@ namespace CStoreAPI.Controllers
     {
         private readonly ApplicationDbContext _context;
         private ImageWork _imgwrk;
+        private readonly ProductService _productService;
 
-        public ProductsController(ApplicationDbContext context, IFileWork imgwrk)
+        public ProductsController(ApplicationDbContext context, IFileWork imgwrk, IProductService productService)
         {
             _context = context;
-            _imgwrk = (ImageWork?)imgwrk!;
+            _imgwrk = (ImageWork)imgwrk!;
+            _productService = (ProductService)productService!;
         }
 
         // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<ApiResult<ProductDTO>>> GetProducts([FromQuery] PaginationParams @params, [FromQuery] string? Category)
         {
+            int count = await _productService.GetProductCount();
             var products = Category == null ? _context.Products.AsNoTracking().OrderBy(c => c.Id) : _context.Products.AsNoTracking().Include(c => c.Category).Where(c => c.Category!.CategoryName == Category);
-            var paginationMetadata = new PaginationMetadata(products.Count(), @params.Page, @params.ItemsPerPage);
+            var paginationMetadata = new PaginationMetadata(count, @params.Page, @params.ItemsPerPage);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
 
             return await ApiResult<ProductDTO>.CreateAsync(
