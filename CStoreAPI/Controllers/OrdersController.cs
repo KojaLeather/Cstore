@@ -70,8 +70,6 @@ namespace CStoreAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrder(int id, Order order)
         {
-            string? message = null;
-            string? subject = null;
             if (id != order.Id)
             {
                 return BadRequest();
@@ -85,18 +83,13 @@ namespace CStoreAPI.Controllers
                 if (product != null)
                 {
                     product.Quantity--;
-                    message = "Hello! Thank you for your order! It's been accepted and now getting ready to be sent to you!";
-                    subject = "Your Order has been Accepted!";
                 }
                 else
                 {
                     order.Status = 4;
                 }
             }
-            if (order.Status == 3) { message = "Hello! Your Order has been sent. Thank you for choosing CStore!"; subject = "Your order has been Completed!"; }
-            if (order.Status == 4) { message = "Hello! Your order has been canceled :c. Please contact support to get more information"; subject = "Cancelled Order"; }
 
-            if (message != null) _iGSend.SendEmail(order.EMail, subject, message);
             try
             {
                 await _context.SaveChangesAsync();
