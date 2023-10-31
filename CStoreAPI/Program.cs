@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using CStoreAPI.Data.Services.EmailService;
 using CStoreAPI.Data.Services.FileWorkService;
 using CStoreAPI.Data.Services.ProductService;
+using CStoreAPI.Data.Services.AdminManage;
 
 namespace CStoreAPI
 {
@@ -43,10 +44,13 @@ namespace CStoreAPI
                 }
                 });
             });
+            builder.Services.AddHttpClient();
             builder.Services.AddSingleton<IFileWork, ImageWork>();
             builder.Services.AddScoped<IGMailService, GmailSend>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IAdminManage, AdminManage>();
             builder.Services.AddMemoryCache();
+            builder.Services.AddRazorPages();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
                  )
@@ -103,6 +107,8 @@ namespace CStoreAPI
 
 
             app.MapControllers();
+
+            app.MapRazorPages();
 
             app.Run();
         }

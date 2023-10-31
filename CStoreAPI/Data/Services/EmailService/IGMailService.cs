@@ -2,6 +2,6 @@
 {
     public interface IGMailService
     {
-        public void SendEmail(string To, string Subject, string Body);
+        public void SendEmail(string To, int StatusCode, int OrderID);
     }
 }

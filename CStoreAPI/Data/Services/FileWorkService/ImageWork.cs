@@ -7,14 +7,18 @@ namespace CStoreAPI.Data.Services.FileWorkService
         public string? FSP;
         public ImageWork()
         {
+            //Getting absolute adress to filestorage from appsettings.json
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(
             "appsettings.json", optional: true, reloadOnChange: true);
             FSP = builder.Build().GetSection("Paths").GetSection("FileStoragePath").Value;
         }
         public string ReadFile(string ImageName)
         {
+            
             string FilePath;
+            //If there's no image in DB we're getting Error pic.
             if (ImageName == null) FilePath = FSP + "\\ErrorPictures\\Error.jpg";
+            //attempt in semirelative path
             else FilePath = FSP + ImageName;
             using (FileStream fsSource = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
             {
@@ -34,6 +38,8 @@ namespace CStoreAPI.Data.Services.FileWorkService
         public string WriteFile(string ImageBase64, string ImageName)
         {
             string FilePath = "\\Images\\" + ImageName;
+
+            //getting rid of data that isn't base64
             if (ImageBase64.Contains(','))
             {
                 ImageBase64 = ImageBase64.Substring(ImageBase64.IndexOf(',') + 1);

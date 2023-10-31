@@ -1,0 +1,11 @@
+﻿@page
+@model CStoreAPI.Pages.AdminManageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+    <h2>@Model.Message</h2>
+    <form method="post">
+        <input type="text" asp-for="Email" />
+        <input type="text" asp-for="Password"/>
+        <input type="submit" value="Отправить" />
+    </form>
+

